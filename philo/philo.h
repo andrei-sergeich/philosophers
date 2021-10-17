@@ -20,18 +20,29 @@ typedef struct s_data
 	int	tm_eat;
 	int	tm_sleep;
 	int	notepme;
+	int	notepme_flag;
+	long	time;
+//	pthread_mutex_t	*mutex;
 }	t_data;
 
-typedef struct s_philos
+typedef struct s_philo
 {
 	t_data			*data;
-	pthread_mutex_t	print_mutex;
+	int				id;
+	pthread_mutex_t	*print_mutex;
+	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*r_fork;
+	int				num_meals;
 	long			last_meal;
 }	t_philo;
 
-int	argv_processing(t_data *data, int argc, char **argv);
-int	philosophers(t_philo *phls, t_data *data);
-int	ft_atoi(const char *str);
-int	err_msg(int err_number);
+int		argv_processing(t_data *data, int argc, char **argv);
+int		philosophers(t_data *data);
+int		create_threads(t_philo *phls, t_data *data);
+void	*phls_life(void *phls);
+
+int		ft_atoi(const char *str);
+int		err_msg(int err_number);
+long	get_time(void);
 
 #endif
