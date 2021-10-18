@@ -25,13 +25,13 @@ int	argv_processing(t_data *data, int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
+	t_data	*data;
 //	t_philo	*phls;
 
-//	data = (t_data *)malloc(sizeof(t_data));
-//	if (!data)
-//		return (err_msg(MALLOC_ERROR));
-	if (argv_processing(&data, argc, argv) != 0)
+	data = (t_data *)malloc(sizeof(t_data));
+	if (!data)
+		return (err_msg(MALLOC_ERROR));
+	if (argv_processing(data, argc, argv) != 0)
 	{
 //		free(data);
 		return (1);
@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 //	phls = (t_philo *)malloc(sizeof(t_philo) * data->num_phls);
 //	if (!phls)
 //		return (err_msg(MALLOC_ERROR));
-	if (philosophers(&data) != 0)
+	if (philosophers(data) != 0)
 	{
 //		free(data);
 //		free(phls);

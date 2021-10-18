@@ -1,13 +1,5 @@
 #include "philo.h"
 
-// static int	positive_or_negative(char in)
-// {
-// 	if (in == 45)
-// 		return (-1);
-// 	else
-// 		return (1);
-// }
-
 int	ft_atoi(const char *str)
 {
 	int		in;
@@ -21,7 +13,6 @@ int	ft_atoi(const char *str)
 			str[in] != '\0')
 		in++;
 	if (str[in] == 43 || str[in] == 45)
-		// sign = positive_or_negative(str[in++]);
 		sign = (str[in++] & 2) - 1;
 	if (str[in] < 48 || str[in] > 57)
 		return (0);

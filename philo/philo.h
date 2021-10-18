@@ -15,14 +15,14 @@
 
 typedef struct s_data
 {
-	int	num_phls;
-	int	tm_die;
-	int	tm_eat;
-	int	tm_sleep;
-	int	notepme;
-	int	notepme_flag;
+	int		num_phls;
+	int		tm_die;
+	int		tm_eat;
+	int		tm_sleep;
+	int		notepme;
+	int		notepme_flag;
 	long	time;
-//	pthread_mutex_t	*mutex;
+	pthread_mutex_t	*mutex;
 }	t_data;
 
 typedef struct s_philo

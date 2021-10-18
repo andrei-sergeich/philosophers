@@ -10,7 +10,7 @@ int	create_threads(t_philo *phls, t_data *data)
 	it = 0;
 	while (it < data->num_phls)
 	{
-		if (pthread_create(&ph_th[it], NULL, phls_life, (void *) &phls[it]) != 0)
+		if (pthread_create(&ph_th[it], NULL, phls_life, (void *)&phls[it]) != 0)
 			return (err_msg(PTHREAD_ERROR));
 		it++;
 	}
@@ -34,16 +34,17 @@ int	philosophers(t_data *data)
 
 	phls = (t_philo *)malloc(sizeof(t_philo) * data->num_phls);
 	fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * data->num_phls);
-//	data->mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	phls->print_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	data->mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+//	phls->print_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 //	pthread_mutex_init(phls->print_mutex, NULL);
+	pthread_mutex_init(data->mutex, NULL);
 	it = 0;
 	while (it < data->num_phls)
 	{
 		phls[it].id = it + 1;
 		pthread_mutex_init(&fork[it], NULL);
 //		pthread_mutex_init(data->mutex, NULL);
-		pthread_mutex_init(phls->print_mutex, NULL);
+//		pthread_mutex_init(phls->print_mutex, NULL);
 		phls[it].l_fork = &fork[it];
 		phls[it].r_fork = &fork[(it + 1) % data->num_phls];
 		phls[it].data = data;
