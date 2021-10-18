@@ -17,7 +17,7 @@ int	create_threads(t_philo *phls, t_data *data)
 	it = 0;
 	while (it < data->num_phls)
 	{
-		if (pthread_detach(ph_th[it]) != 0)
+		if (pthread_join(ph_th[it], NULL) != 0) /* was detach */
 			return (err_msg(PTHREAD_ERROR));
 		it++;
 	}

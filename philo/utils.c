@@ -46,3 +46,12 @@ long	get_time(void)
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
+
+void	ft_print(t_philo *tmp)
+{
+	pthread_mutex_lock(tmp->data->mutex);
+	printf("phls[it].id - %d\t", tmp->id);
+	printf("tm_die - %d\t", tmp->data->tm_die);
+	printf("notepme - %d\n", tmp->data->notepme);
+	pthread_mutex_unlock(tmp->data->mutex);
+}
