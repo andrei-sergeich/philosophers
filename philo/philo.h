@@ -15,21 +15,21 @@
 
 typedef struct s_data
 {
-	int		num_phls;
-	int		tm_die;
-	int		tm_eat;
-	int		tm_sleep;
-	int		notepme;
-	int		notepme_flag;
-	long	time;
-	pthread_mutex_t	*mutex;
+	int				num_phls;
+	int				tm_die;
+	int				tm_eat;
+	int				tm_sleep;
+	int				notepme;
+	int				notepme_flag;
+	long			time;
+	pthread_mutex_t	*print_mutex;
 }	t_data;
 
 typedef struct s_philo
 {
 	t_data			*data;
 	int				id;
-	pthread_mutex_t	*print_mutex;
+//	pthread_mutex_t	*print_mutex;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	int				num_meals;

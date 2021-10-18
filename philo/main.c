@@ -26,7 +26,6 @@ int	argv_processing(t_data *data, int argc, char **argv)
 int	main(int argc, char **argv)
 {
 	t_data	*data;
-//	t_philo	*phls;
 
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
@@ -36,31 +35,12 @@ int	main(int argc, char **argv)
 //		free(data);
 		return (1);
 	}
-//	phls = (t_philo *)malloc(sizeof(t_philo) * data->num_phls);
-//	if (!phls)
-//		return (err_msg(MALLOC_ERROR));
 	if (philosophers(data) != 0)
 	{
 //		free(data);
-//		free(phls);
 		return (1);
 	}
-//	printf("num_phls - %d\n", data->num_phls);
-//	printf("tm_die - %d\n", data->tm_die);
-//	printf("tm_eat - %d\n", data->tm_eat);
-//	printf("tm_sleep - %d\n", data->tm_sleep);
-//	printf("notepme - %d\n", data->notepme);
-
 //	free(data);
-//	free(phls);
 	return (0);
 }
 
-//int	main(int argc, char *argv[])
-//{
-//	if (argc < 5 || argc > 6)
-//		return (err_msg(WRONG_COUNT_OF_ARGUMENTS));
-//	if (philo(argc, argv) != 0)
-//		return (1);
-//	return (0);
-//}
