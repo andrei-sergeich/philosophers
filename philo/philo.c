@@ -5,7 +5,7 @@ int	create_threads(t_philo *phls, t_data *data)
 	pthread_t	*ph_th;
 	int			it;
 
-	data->time = get_time();
+	data->creation_time = get_time();
 	ph_th = malloc(sizeof(pthread_t) * data->num_phls);
 	it = 0;
 	while (it < data->num_phls)

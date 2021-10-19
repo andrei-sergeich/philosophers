@@ -30,13 +30,35 @@ int	err_msg(int err_number)
 {
 	if (err_number == WRONG_COUNT_OF_ARGUMENTS)
 		printf("you passed the wrong number of arguments");
-	if (err_number == WRONG_ARGUMENT)
+	else if (err_number == WRONG_ARGUMENT)
 		printf("you passed the wrong argument");
-	if (err_number == MALLOC_ERROR)
+	else if (err_number == MALLOC_ERROR)
 		printf("malloc error");
-	if (err_number == PTHREAD_ERROR)
+	else if (err_number == PTHREAD_ERROR)
 		printf("pthread error");
 	return (1);
+}
+
+void	phls_msg(int msg_code, long time, int id, pthread_mutex_t *print_mutex)
+{
+	pthread_mutex_lock(print_mutex);
+	if (msg_code == L_FORK_TAKEN)
+		printf("%ld %d has taken a fork\n", time, id);
+	else if (msg_code == R_FORK_TAKEN)
+		printf("%ld %d has taken a fork\n", time, id);
+	else if (msg_code == EATING)
+		printf("%ld %d is eating\n", time, id);
+	else if (msg_code == SLEEPING)
+		printf("%ld %d is sleeping\n", time, id);
+	else if (msg_code == THINKING)
+		printf("%ld %d is thinking\n", time, id);
+	else if (msg_code == DIED)
+	{
+		printf("%ld %d died\n", time, id);
+		return ;
+	}
+	pthread_mutex_unlock(print_mutex);
+//	return (0);
 }
 
 long	get_time(void)

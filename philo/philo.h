@@ -8,10 +8,17 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-# define WRONG_COUNT_OF_ARGUMENTS -1
-# define WRONG_ARGUMENT -2
-# define MALLOC_ERROR -3
-# define PTHREAD_ERROR -4
+# define WRONG_COUNT_OF_ARGUMENTS	-1
+# define WRONG_ARGUMENT				-2
+# define MALLOC_ERROR				-3
+# define PTHREAD_ERROR				-4
+
+# define L_FORK_TAKEN	1
+# define R_FORK_TAKEN	2
+# define EATING			3
+# define SLEEPING		4
+# define THINKING		5
+# define DIED			6
 
 typedef struct s_data
 {
@@ -21,7 +28,7 @@ typedef struct s_data
 	int				tm_sleep;
 	int				notepme;
 	int				notepme_flag;
-	long			time;
+	long			creation_time;
 	pthread_mutex_t	*print_mutex;
 }	t_data;
 
@@ -33,6 +40,7 @@ typedef struct s_philo
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	int				num_meals;
+	int				does_not_eat;
 	long			last_meal;
 }	t_philo;
 
@@ -40,9 +48,17 @@ int		argv_processing(t_data *data, int argc, char **argv);
 int		philosophers(t_data *data);
 int		create_threads(t_philo *phls, t_data *data);
 void	*phls_life(void *phls);
+void	philo_takes_forks(t_philo *phls);
+void	philo_eating(t_philo *phls);
+void	philo_sleeping(t_philo *phls);
+void	eating_or_sleeping(long time);
 
 int		ft_atoi(const char *str);
 int		err_msg(int err_number);
+void	phls_msg(int msg_code, long time, int id, pthread_mutex_t *print_mutex);
 long	get_time(void);
+
+
+void	ft_print(t_philo *tmp);
 
 #endif
