@@ -4,7 +4,9 @@ project(philosophers C)
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_DL_LIBS -lpthread)
 
-FILE(GLOB PHILO "philo/*.*")
+FILE(GLOB PHILO "philo/srcs/*.*")
+
+include_directories(include)
 
 add_executable(philo ${PHILO})
 

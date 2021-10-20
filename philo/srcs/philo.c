@@ -1,6 +1,20 @@
-#include "philo.h"
+#include "../include/philo.h"
 
-int	create_threads(t_philo *phls, t_data *data)
+void	philo_destroyer(t_philo *phls, t_data *data)
+{
+	int	it;
+
+	pthread_mutex_destroy(data->print_mutex);
+	it = 0;
+	while (it < data->num_phls)
+	{
+		pthread_mutex_destroy(phls[it].l_fork);
+		pthread_mutex_destroy(phls[it].r_fork);
+		it++;
+	}
+}
+
+int	philo_creator(t_philo *phls, t_data *data)
 {
 	pthread_t	*ph_th;
 	int			it;
@@ -21,7 +35,7 @@ int	create_threads(t_philo *phls, t_data *data)
 			return (err_msg(PTHREAD_ERROR));
 		it++;
 	}
-
+	philo_destroyer(phls, data);
 //	printf("%ld\n", data->time);
 	return (0);
 }
@@ -52,7 +66,7 @@ int	philosophers(t_data *data)
 			phls[it].num_meals = 0;
 		it++;
 	}
-	if (create_threads(phls, data) != 0)
+	if (philo_creator(phls, data) != 0)
 		return (1);
 //	free(fork);
 //	free(data->print_mutex);

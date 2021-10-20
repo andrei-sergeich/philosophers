@@ -1,8 +1,8 @@
-#include "philo.h"
+#include "../include/philo.h"
 
 void	eating_or_sleeping(long time)
 {
-	long	start; //time_t
+	long	start;	//time_t
 	long	stop;	//time_t
 
 	start = get_time();
@@ -33,7 +33,7 @@ void	philo_eating(t_philo *phls)
 	{
 		phls->num_meals++;
 		if (phls->num_meals >= phls->data->notepme)
-			phls->does_not_eat = 1;
+			phls->satiety = 1;
 	}
 	philo_sleeping(phls);
 }
@@ -59,7 +59,7 @@ void	*phls_life(void *phls)
 	tmp->num_meals = 0;
 	if (!(tmp->id % 2))			// maybe remove
 		usleep(100); // 100?
-	while (1)
+	while (life_checker(tmp) == 0)
 	{
 		philo_takes_forks(phls);
 		phls_msg(THINKING, get_time() - tmp->data->creation_time, tmp->id, \

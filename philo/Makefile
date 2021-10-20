@@ -3,7 +3,7 @@ NAME		=	philo
 SRCS_FILES	=	${shell find ./srcs -name "*.c"}
 
 SRCS		=	$(SRCS_FILES) # remove!!!!!!!!!!!!!!!!!!!!
-OBJS		=	$(patsubst %.c,%.o,$(SRCS))
+OBJS		=	$(patsubst %.c,%.o,$(SRCS_FILES))
 
 HEADER		=	-I./include/philo.h
 
@@ -13,7 +13,7 @@ RM			=	rm -f
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS_MAN) include/philo.h
+$(NAME):	$(OBJS) include/philo.h
 			@echo "\033[33m----Compiling project----"
 			@$(CC) $(CFLAGS) $(HEADER) $(OBJS) -o $(NAME)
 			@#clear

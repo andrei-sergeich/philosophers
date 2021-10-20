@@ -1,4 +1,4 @@
-#include "philo.h"
+#include "../include/philo.h"
 
 int	argv_processing(t_data *data, int argc, char **argv)
 {
@@ -43,4 +43,3 @@ int	main(int argc, char **argv)
 //	free(data);
 	return (0);
 }
-

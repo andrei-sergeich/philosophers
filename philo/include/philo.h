@@ -40,18 +40,22 @@ typedef struct s_philo
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	int				num_meals;
-	int				does_not_eat;
+	int				satiety;
 	long			last_meal;
+	pthread_t	*th_id;
 }	t_philo;
 
 int		argv_processing(t_data *data, int argc, char **argv);
 int		philosophers(t_data *data);
-int		create_threads(t_philo *phls, t_data *data);
+int		philo_creator(t_philo *phls, t_data *data);
 void	*phls_life(void *phls);
 void	philo_takes_forks(t_philo *phls);
 void	philo_eating(t_philo *phls);
 void	philo_sleeping(t_philo *phls);
 void	eating_or_sleeping(long time);
+void	philo_destroyer(t_philo *phils, t_data *data);
+
+int		life_checker(t_philo *phls);
 
 int		ft_atoi(const char *str);
 int		err_msg(int err_number);
