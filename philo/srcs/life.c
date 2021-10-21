@@ -44,28 +44,25 @@ void	philo_takes_forks(t_philo *phls)
 	phls_msg(L_FORK_TAKEN, get_time() - phls->data->creation_time, \
 				phls->id, phls->data->print_mutex);
 	pthread_mutex_lock(phls->r_fork);
-	phls_msg(L_FORK_TAKEN, get_time() - phls->data->creation_time, \
+	phls_msg(R_FORK_TAKEN, get_time() - phls->data->creation_time, \
 				phls->id, phls->data->print_mutex);
 	philo_eating(phls);
 }
 
-void	*phls_life(void *phls)
+void	*phls_life(void *phls_void)
 {
-	t_philo	*tmp;
-//	int i = 5;
+	t_philo	*phls;
 
-	tmp = (t_philo *)phls;
-	tmp->last_meal = get_time(); // remove
-	tmp->num_meals = 0;
-	if (!(tmp->id % 2))			// maybe remove
+	phls = (t_philo *)phls_void;
+	phls->last_meal = get_time(); // remove
+	phls->num_meals = 0;
+	if (!(phls->id % 2))			// maybe remove
 		usleep(100); // 100?
-	while (life_checker(tmp) == 0)
+	while (1)
 	{
 		philo_takes_forks(phls);
-		phls_msg(THINKING, get_time() - tmp->data->creation_time, tmp->id, \
-					tmp->data->print_mutex);
+		phls_msg(THINKING, get_time() - phls->data->creation_time, phls->id, \
+					phls->data->print_mutex);
 	}
-
-//	ft_print(phls);
 	return (NULL);
 }

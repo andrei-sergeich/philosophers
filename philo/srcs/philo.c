@@ -9,7 +9,7 @@ void	philo_destroyer(t_philo *phls, t_data *data)
 	while (it < data->num_phls)
 	{
 		pthread_mutex_destroy(phls[it].l_fork);
-		pthread_mutex_destroy(phls[it].r_fork);
+//		pthread_mutex_destroy(phls[it].r_fork);
 		it++;
 	}
 }
@@ -31,12 +31,14 @@ int	philo_creator(t_philo *phls, t_data *data)
 	it = 0;
 	while (it < data->num_phls)
 	{
-		if (pthread_join(ph_th[it], NULL) != 0) /* was detach */
+		if (pthread_detach(ph_th[it]) != 0) /* was detach */
 			return (err_msg(PTHREAD_ERROR));
 		it++;
 	}
+	if (philo_checker(phls) != 0)
+		return (1);
 	philo_destroyer(phls, data);
-//	printf("%ld\n", data->time);
+	free(ph_th);
 	return (0);
 }
 
@@ -68,8 +70,8 @@ int	philosophers(t_data *data)
 	}
 	if (philo_creator(phls, data) != 0)
 		return (1);
-//	free(fork);
-//	free(data->print_mutex);
+	free(fork);
+	free(data->print_mutex);
 	free(phls);
 	return (0);
 }

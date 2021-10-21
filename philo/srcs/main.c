@@ -32,14 +32,14 @@ int	main(int argc, char **argv)
 		return (err_msg(MALLOC_ERROR));
 	if (argv_processing(data, argc, argv) != 0)
 	{
-//		free(data);
+		free(data);
 		return (1);
 	}
 	if (philosophers(data) != 0)
 	{
-//		free(data);
+		free(data);
 		return (1);
 	}
-//	free(data);
+	free(data);
 	return (0);
 }

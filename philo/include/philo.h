@@ -42,7 +42,7 @@ typedef struct s_philo
 	int				num_meals;
 	int				satiety;
 	long			last_meal;
-	pthread_t	*th_id;
+//	pthread_t	*th_id;
 }	t_philo;
 
 int		argv_processing(t_data *data, int argc, char **argv);
@@ -53,9 +53,11 @@ void	philo_takes_forks(t_philo *phls);
 void	philo_eating(t_philo *phls);
 void	philo_sleeping(t_philo *phls);
 void	eating_or_sleeping(long time);
-void	philo_destroyer(t_philo *phils, t_data *data);
+int		philo_checker(t_philo *phls);
+void	philo_destroyer(t_philo *phls, t_data *data);
 
-int		life_checker(t_philo *phls);
+void	*life_checker(void *phls);
+int		satiety_checker(t_philo *phls);
 
 int		ft_atoi(const char *str);
 int		err_msg(int err_number);
