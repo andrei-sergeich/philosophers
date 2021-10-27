@@ -64,7 +64,6 @@ int		err_msg(int err_number);
 void	phls_msg(int msg_code, long time, int id, pthread_mutex_t *print_mutex);
 long	get_time(void);
 
-
-void	ft_print(t_philo *tmp);
+void	ft_print(long time, int id, char *msg, pthread_mutex_t *print_mutex);
 
 #endif
