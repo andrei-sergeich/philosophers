@@ -17,14 +17,14 @@ void	eating_or_sleeping(long time)
 void	philo_sleeping(t_philo *phls)
 {
 	phls_msg(SLEEPING, get_time() - phls->data->creation_time, \
-				phls->id, phls->data->print_mutex);
+				phls->id, phls->data->print_sem);
 	eating_or_sleeping(phls->data->tm_sleep);
 }
 
 void	philo_eating(t_philo *phls)
 {
 	phls_msg(EATING, get_time() - phls->data->creation_time, \
-				phls->id, phls->data->print_mutex);
+				phls->id, phls->data->print_sem);
 	phls->last_meal = get_time();
 	eating_or_sleeping(phls->data->tm_eat);
 	pthread_mutex_unlock(phls->l_fork);
@@ -42,10 +42,10 @@ void	philo_takes_forks(t_philo *phls)
 {
 	pthread_mutex_lock(phls->l_fork);
 	phls_msg(L_FORK_TAKEN, get_time() - phls->data->creation_time, \
-				phls->id, phls->data->print_mutex);
+				phls->id, phls->data->print_sem);
 	pthread_mutex_lock(phls->r_fork);
 	phls_msg(R_FORK_TAKEN, get_time() - phls->data->creation_time, \
-				phls->id, phls->data->print_mutex);
+				phls->id, phls->data->print_sem);
 	philo_eating(phls);
 }
 
@@ -62,7 +62,7 @@ void	*phls_life(void *phls_void)
 	{
 		philo_takes_forks(phls);
 		phls_msg(THINKING, get_time() - phls->data->creation_time, phls->id, \
-					phls->data->print_mutex);
+					phls->data->print_sem);
 	}
 	return (NULL);
 }

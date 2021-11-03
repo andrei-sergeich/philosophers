@@ -12,6 +12,7 @@
 # define WRONG_ARGUMENT				-2
 # define MALLOC_ERROR				-3
 # define PTHREAD_ERROR				-4
+# define FORK_ERROR					-5
 
 # define L_FORK_TAKEN	1
 # define R_FORK_TAKEN	2
@@ -30,6 +31,7 @@ typedef struct s_data
 	int		notepme_flag;
 	long	creation_time;
 	sem_t	*print_sem;
+	sem_t	*fork;
 }	t_data;
 
 typedef struct s_philo
@@ -59,9 +61,10 @@ int		satiety_checker(t_philo *phls);
 
 int		ft_atoi(const char *str);
 int		err_msg(int err_number);
-void	phls_msg(int msg_code, long time, int id, pthread_mutex_t *print_mutex);
+void	phls_msg(int msg_code, long time, int id, sem_t *print_sem);
 long	get_time(void);
+void	sem_opener(t_data *data);
 
-void	ft_print(long time, int id, char *msg, pthread_mutex_t *print_mutex);
+void	ft_print(long time, int id, char *msg, sem_t *print_sem);
 
 #endif

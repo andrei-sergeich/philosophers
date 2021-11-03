@@ -31,14 +31,14 @@ void	ft_putendl(char *s)
 	write(1, "\n", 1);
 }
 
-void	ft_print(long time, int id, char *msg, pthread_mutex_t *print_mutex)
+void	ft_print(long time, int id, char *msg, sem_t *print_sem)
 {
-	pthread_mutex_lock(print_mutex);
+	sem_wait(print_sem);
 	ft_putnbr_ll(time);
 	write(1, " ", 1);
 	ft_putnbr_ll(id);
 	ft_putendl(msg);
-	pthread_mutex_unlock(print_mutex);
+	sem_post(print_sem);
 }
 
 //void	phls_msg(int msg_code, long time, int id, pthread_mutex_t *print_mutex)

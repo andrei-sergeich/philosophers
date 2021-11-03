@@ -48,19 +48,27 @@ int	philosophers(t_data *data)
 	int		it;
 	int		pid;
 
-	phls = (t_philo *)malloc(sizeof(t_philo) * data->num_phls);
-//	data->print_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-//	phls->print_mutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-//	pthread_mutex_init(phls->print_mutex, NULL);
 	it = 0;
+	phls = (t_philo *)malloc(sizeof(t_philo) * data->num_phls);
+	sem_opener(data);
+	data->creation_time = get_time();
 	while (it < data->num_phls)
 	{
-		phls[it].id = it + 1;
-		phls[it].l_fork = &fork[it];
-		phls[it].r_fork = &fork[(it + 1) % data->num_phls];
-		phls[it].data = data;
-		if (data->notepme_flag == 1)
-			phls[it].num_meals = 0;
+		pid = fork();
+		if (pid == -1)
+			return (err_msg(FORK_ERROR));
+//		phls[it] = (malloc(sizeof(t_philo) * data->num_phls));
+		phls[it].pid = pid;
+		if (pid == 0)
+		{
+			phls[it].id = it + 1;
+			phls[it].fork = data->fork;
+			phls[it].data = data;
+			if (data->notepme_flag == 1)
+				phls[it].num_meals = 0;
+			phls_life((void *)&phls[it]);
+			exit(0);
+		}
 		it++;
 	}
 	if (philo_creator(phls, data) != 0)
