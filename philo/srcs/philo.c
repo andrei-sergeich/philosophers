@@ -64,7 +64,7 @@ int	philosophers(t_data *data)
 		phls[it].l_fork = &fork[it];
 		phls[it].r_fork = &fork[(it + 1) % data->num_phls];
 		phls[it].data = data;
-		if (data->notepme_flag == 1)
+		if (data->notepme > 0)
 			phls[it].num_meals = 0;
 		it++;
 	}

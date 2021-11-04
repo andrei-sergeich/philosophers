@@ -27,7 +27,7 @@ typedef struct s_data
 	int				tm_eat;
 	int				tm_sleep;
 	int				notepme;
-	int				notepme_flag;
+//	int				notepme_flag;
 	long			creation_time;
 	pthread_mutex_t	*print_mutex;
 }	t_data;

@@ -28,7 +28,7 @@ void	*life_checker(void *phls_void)
 	{
 		if (it >= phls[0].data->num_phls)
 			it = 0;
-		if (phls[0].data->notepme_flag == 1)
+		if (phls[0].data->notepme > 0)
 		{
 			if (satiety_checker(phls) == 1)
 				return (NULL);

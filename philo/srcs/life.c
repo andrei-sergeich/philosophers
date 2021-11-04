@@ -29,7 +29,7 @@ void	philo_eating(t_philo *phls)
 	eating_or_sleeping(phls->data->tm_eat);
 	pthread_mutex_unlock(phls->l_fork);
 	pthread_mutex_unlock(phls->r_fork);
-	if (phls->data->notepme_flag == 1)
+	if (phls->data->notepme > 0)
 	{
 		phls->num_meals++;
 		if (phls->num_meals >= phls->data->notepme)
