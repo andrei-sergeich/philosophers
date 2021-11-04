@@ -5,8 +5,12 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <fcntl.h>
+# include <pthread.h>
 # include <semaphore.h>
+# include <signal.h>
 # include <sys/time.h>
+# include <sys/wait.h>
 
 # define WRONG_COUNT_OF_ARGUMENTS	-1
 # define WRONG_ARGUMENT				-2
@@ -28,7 +32,6 @@ typedef struct s_data
 	int		tm_eat;
 	int		tm_sleep;
 	int		notepme;
-	int		notepme_flag;
 	long	creation_time;
 	sem_t	*print_sem;
 	sem_t	*fork;
@@ -38,7 +41,7 @@ typedef struct s_philo
 {
 	t_data	*data;
 	int		id;
-	int		pid;
+	pid_t	pid;
 	sem_t	*fork;
 	int		num_meals;
 	int		satiety;
@@ -47,14 +50,14 @@ typedef struct s_philo
 
 int		argv_processing(t_data *data, int argc, char **argv);
 int		philosophers(t_data *data);
-int		philo_creator(t_philo *phls, t_data *data);
+//int		philo_creator(t_philo *phls, t_data *data);
 void	*phls_life(void *phls);
 void	philo_takes_forks(t_philo *phls);
 void	philo_eating(t_philo *phls);
 void	philo_sleeping(t_philo *phls);
 void	eating_or_sleeping(long time);
 int		philo_checker(t_philo *phls);
-void	philo_destroyer(t_philo *phls, t_data *data);
+//void	philo_destroyer(t_philo *phls, t_data *data);
 
 void	*life_checker(void *phls);
 int		satiety_checker(t_philo *phls);
@@ -64,6 +67,7 @@ int		err_msg(int err_number);
 void	phls_msg(int msg_code, long time, int id, sem_t *print_sem);
 long	get_time(void);
 void	sem_opener(t_data *data);
+void	sem_closer(t_data *data);
 
 void	ft_print(long time, int id, char *msg, sem_t *print_sem);
 

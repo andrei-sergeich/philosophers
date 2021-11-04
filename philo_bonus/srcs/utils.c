@@ -42,7 +42,6 @@ int	err_msg(int err_number)
 void	phls_msg(int msg_code, long time, int id, sem_t *print_sem)
 {
 	sem_wait(print_sem);
-//	pthread_mutex_lock(print_mutex);
 	if (msg_code == L_FORK_TAKEN)
 		printf("%ld %d has taken a fork\n", time, id);
 	else if (msg_code == R_FORK_TAKEN)
@@ -58,7 +57,6 @@ void	phls_msg(int msg_code, long time, int id, sem_t *print_sem)
 		printf("%ld %d died\n", time, id);
 		exit (1);
 	}
-//	pthread_mutex_unlock(print_mutex);
 	sem_post(print_sem);
 }
 
@@ -68,16 +66,4 @@ long	get_time(void)
 
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
-}
-
-void	sem_opener(t_data *data)
-{
-	if (sem_unlink("print_sem") == -1)
-		exit(1);
-	if (sem_unlink("fork"))
-		exit(1);
-	data->print_sem = sem_open("print_sem", O_CREAT, 0666, 1);
-	data->fork = sem_open("fork", O_CREAT, 0666, 1);
-	if (data->print_sem == 0 || data->fork == 0)
-		exit(1);
 }

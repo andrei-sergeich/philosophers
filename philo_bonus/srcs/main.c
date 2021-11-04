@@ -9,14 +9,12 @@ int	argv_processing(t_data *data, int argc, char **argv)
 	data->tm_eat = ft_atoi(argv[3]);
 	data->tm_sleep = ft_atoi(argv[4]);
 	data->notepme = 0;
-	data->notepme_flag = 0;
 	if (data->num_phls < 1 || data->tm_die < 1 || data->tm_eat < 1 \
 		|| data->tm_sleep < 1)
 		return (err_msg(WRONG_ARGUMENT));
 	if (argc == 6)
 	{
 		data->notepme = ft_atoi(argv[5]);
-		data->notepme_flag = 1;
 		if (data->notepme < 1)
 			return (err_msg(WRONG_ARGUMENT));
 	}

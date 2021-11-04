@@ -9,7 +9,7 @@ int	satiety_checker(t_philo *phls)
 	full_satiety = 0;
 	while (it < phls->data->num_phls)
 	{
-		full_satiety += phls[it].satiety;
+		full_satiety += phls->satiety;
 		it++;
 	}
 	if (full_satiety >= phls->data->num_phls)
@@ -26,18 +26,16 @@ void	*life_checker(void *phls_void)
 	phls = (t_philo *)phls_void;
 	while (1)
 	{
-		if (it >= phls[0].data->num_phls)
-			it = 0;
-		if (phls[0].data->notepme_flag == 1)
+		if (phls->data->notepme > 0)
 		{
 			if (satiety_checker(phls) == 1)
-				return (NULL);
+				exit (0);
 		}
-		if ((get_time() - phls[it].last_meal) > phls[it].data->tm_die)
+		if ((get_time() - phls->last_meal) > phls->data->tm_die)
 		{
-			phls_msg(DIED, get_time() - phls[it].data->creation_time, \
-						phls[it].id, phls[0].data->print_mutex);
-			return ((void *) 1);
+			phls_msg(DIED, get_time() - phls->data->creation_time, \
+						phls->id, phls->data->print_sem);
+			exit (0);
 		}
 		it++;
 		usleep(100);
@@ -51,7 +49,7 @@ int	philo_checker(t_philo *phls)
 
 	if (pthread_create(&checker, NULL, life_checker, (void *)phls) != 0)
 		return (err_msg(PTHREAD_ERROR));
-	if (pthread_join(checker, NULL) != 0)
+	if (pthread_detach(checker) != 0)
 		return (err_msg(PTHREAD_ERROR));
 	return (0);
 }
