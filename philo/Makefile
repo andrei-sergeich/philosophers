@@ -1,26 +1,23 @@
-NAME		=	philo
+NAME	=	philo
 
-SRCS_FILES	=	${shell find ./srcs -name "*.c"}
+SRCS	=	${shell find ./srcs -name "*.c"}
+OBJS	=	$(patsubst %.c,%.o,$(SRCS))
+HEADER	=	./include/philo.h
 
-SRCS		=	$(SRCS_FILES) # remove!!!!!!!!!!!!!!!!!!!!
-OBJS		=	$(patsubst %.c,%.o,$(SRCS_FILES))
-
-HEADER		=	-I./include/philo.h
-
-CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror
-RM			=	rm -f
+CC		=	gcc
+CFLAGS	=	-Wall -Wextra -Werror -I.
+RM		=	rm -f
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS) include/philo.h
+$(NAME):	$(OBJS) $(HEADER)
 			@echo "\033[33m----Compiling project----"
-			@$(CC) $(CFLAGS) $(HEADER) $(OBJS) -o $(NAME)
+			@$(CC) $(CFLAGS) $(HEADER) $(OBJS) -o $(NAME) -pthread
 			@#clear
 			@echo "Let's some mute, my Master!!!"
 
-%.o:		%.c
-			@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
+%.o:		%.c $(HEADER)
+			@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 			$(RM) $(OBJS)

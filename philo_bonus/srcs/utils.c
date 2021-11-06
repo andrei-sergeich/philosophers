@@ -29,13 +29,13 @@ int	ft_atoi(const char *str)
 int	err_msg(int err_number)
 {
 	if (err_number == WRONG_COUNT_OF_ARGUMENTS)
-		printf("you passed the wrong number of arguments");
+		printf("you passed the wrong number of arguments\n");
 	else if (err_number == WRONG_ARGUMENT)
-		printf("you passed the wrong argument");
+		printf("you passed the wrong argument\n");
 	else if (err_number == MALLOC_ERROR)
-		printf("malloc error");
+		printf("malloc error\n");
 	else if (err_number == PTHREAD_ERROR)
-		printf("pthread error");
+		printf("pthread error\n");
 	return (1);
 }
 

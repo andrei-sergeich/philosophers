@@ -6,7 +6,7 @@ void	eating_or_sleeping(long time)
 	long	stop;
 
 	start = get_time();
-	stop = start + time; // get_time() + time
+	stop = start + time;
 	while (stop > start)
 	{
 		usleep(50);
@@ -35,7 +35,6 @@ void	philo_eating(t_philo *phls)
 		if (phls->num_meals >= phls->data->notepme)
 			phls->satiety = 1;
 	}
-//	philo_sleeping(phls);
 }
 
 void	philo_takes_forks(t_philo *phls)
@@ -46,10 +45,9 @@ void	philo_takes_forks(t_philo *phls)
 	sem_wait(phls->data->fork);
 	phls_msg(R_FORK_TAKEN, get_time() - phls->data->creation_time, \
 				phls->id, phls->data->print_sem);
-//	philo_eating(phls);
 }
 
-void	*phls_life(void *phls_void)
+void	phls_life(void *phls_void)
 {
 	t_philo	*phls;
 
@@ -57,7 +55,7 @@ void	*phls_life(void *phls_void)
 	phls->last_meal = get_time();
 	phls->num_meals = 0;
 	if (!(phls->id % 2))
-		usleep(500);	// 100
+		usleep(500);
 	if (philo_checker(phls) != 0)
 		exit (1);
 	while (1)

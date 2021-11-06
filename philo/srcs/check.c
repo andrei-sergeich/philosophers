@@ -7,12 +7,12 @@ int	satiety_checker(t_philo *phls)
 
 	it = 0;
 	full_satiety = 0;
-	while (it < phls->data->num_phls)
+	while (it < phls[0].data->num_phls)
 	{
 		full_satiety += phls[it].satiety;
 		it++;
 	}
-	if (full_satiety >= phls->data->num_phls)
+	if (full_satiety >= phls[0].data->num_phls)
 		return (1);
 	return (0);
 }
