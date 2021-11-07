@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmero <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/07 12:43:33 by cmero             #+#    #+#             */
+/*   Updated: 2021/11/07 12:43:34 by cmero            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
 
@@ -66,7 +78,5 @@ int		ft_atoi(const char *str);
 int		err_msg(int err_number);
 void	phls_msg(int msg_code, long time, int id, sem_t *print_sem);
 long	get_time(void);
-
-//void	ft_print(long time, int id, char *msg, sem_t *print_sem);
 
 #endif

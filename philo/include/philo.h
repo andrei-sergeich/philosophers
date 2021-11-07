@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmero <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/11/07 12:41:05 by cmero             #+#    #+#             */
+/*   Updated: 2021/11/07 12:41:06 by cmero            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -61,7 +73,5 @@ int		ft_atoi(const char *str);
 int		err_msg(int err_number);
 void	phls_msg(int msg_code, long time, int id, pthread_mutex_t *print_mutex);
 long	get_time(void);
-
-//void	ft_print(long time, int id, char *msg, pthread_mutex_t *print_mutex);
 
 #endif

@@ -1,18 +1,20 @@
 NAME	=	philo_bonus
 
 SRCS	=	${shell find ./srcs -name "*.c"}
+
 OBJS	=	$(patsubst %.c,%.o,$(SRCS))
+
 HEADER	=	./include/philo_bonus.h
 
 CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror -I.
+CFLAGS	=	-Wall -Wextra -Werror -I. -pthread
 RM		=	rm -f
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS) $(HEADER)
+$(NAME):	$(OBJS)
 			@echo "\033[33m----Compiling project----"
-			@$(CC) $(CFLAGS) $(HEADER) $(OBJS) -o $(NAME) -pthread
+			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 			@#clear
 			@echo "Let's some sem, my Master!!!"
 
